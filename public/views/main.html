@@ -1,24 +1,151 @@
-<h1>{{title}}</h1>
+<div class="ui grid">
+    <!-- <div class="two wide column">
+        <form class="ui form">
+            <div class="field">
+                <label>First Name</label>
+                <input type="text" name="first-name" placeholder="First Name">
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input type="text" name="last-name" placeholder="Last Name">
+            </div>
 
-<form class="form-inline">
-	<div class="form-group">
-		<input type="text" class="form-control" id="inputMessage" 
-			   placeholder="Your task" ng-model="description">
-	</div>
-	<button type="submit" class="btn btn-default" ng-click="add()">Add</button>
-</form>
-<hr>
-<ul class="list-group">
-	<li class="list-group-item" ng-repeat="todo in todos">
-		<form class="form-inline">
-			<div class="form-group">
-				<input type="text" class="form-control" id="inputMessage" 
-					   ng-model="todo.description">
-			</div>
-			<div class="pull-right">
-				<button type="submit" class="btn btn-default" ng-click="update(todo)">Update</button>
-				<button type="submit" class="btn btn-danger" ng-click="delete(todo)">Delete</button>
-			</div>
-		</form>
-	</li>
-</ul>
+            <button class="ui button" type="submit" ng-click="search()">Submit</button>
+        </form> -->
+    <!-- </div> -->
+    <!-- <div class="ui menu"> -->
+  <!-- <div class="ui category search item">
+    <div class="ui transparent icon input">
+      <input class="prompt" type="text" placeholder="Search animals..." ng-keyup="search">
+      <i class="search link icon"></i>
+    </div>
+    <div class="results">
+      <h4>hola</h4>
+    </div>
+  </div>
+</div>
+<div class="ui segment">
+  <p></p>
+</div> -->
+<div class="ui search">
+  <div class="ui icon input">
+    <input class="prompt" type="text" placeholder="Search countries..." ng-keyup="search()" ng-model="searchTerm">
+    <i class="search icon"></i>
+  </div>
+  <div class="results" ></div>
+</div>
+
+    <!-- /*
+================================================================================================
+*/ -->
+    <div class="fourteen wide column ui grid" ng-repeat="heroe in heroes">
+        <div class="five wide column">
+            <div class="ui people shape">
+                <div class="sides">
+                    <div class="active side">
+                        <div class="ui card">
+                            <div class="image">
+                                <img ng-src="{{heroe.thumbnail.path}}.{{heroe.thumbnail.extension}}">
+                            </div>
+                            <div class="content">
+                                <div class="header">{{heroe.name}}</div>
+                                <div class="meta">
+                                    <a>Description</a>
+                                </div>
+                                <div class="description">
+                                    {{heroe.description}}
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <span class="right floated" style="cursor: pointer;" ng-click="showComics(); j = 1">
+                                    <i class="book icon"></i>
+                                    Comics:
+                                    {{heroe.comics.items.length}}
+                                </span>
+                                <span style="cursor: pointer;" ng-click="showEvents(); i = 1">
+                                    <i class="calendar icon"></i>
+                                    Events:
+                                    {{heroe.events.items.length}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="five wide column">
+
+            <div class="ui cards">
+                <div class="card" ng-repeat="item in comics | limitTo: 3 " ng-click="item">
+                    <div class="content">
+                        <img class="right floated mini ui image" ng-src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}">
+                        <div class="header">
+{{item.title}}                        </div>
+                        <div class="meta">
+                            By <span ng-repeat="creator in item.creators.items |limitTo: 3 ">{{creator.name}},</span> ...
+                        </div>
+                        <div class="description">
+                            {{item.description | limitTo: 90}}...
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui two buttons">
+                            <div class="ui basic green button">Approve</div>
+                            <div class="ui basic red button">Decline</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui cards">
+
+            <div class="card" ng-repeat="item in events | limitTo: 3 " ng-click="item">
+                <div class="content">
+                    <img class="right floated mini ui image" ng-src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}">
+                    <div class="header">
+                        {{item.title}}
+                    </div>
+                    <div class="meta">
+                        By <span ng-repeat="creator in item.creators.items |limitTo: 3 ">{{creator.name}},</span> ...
+                    </div>
+                    <div class="description">
+                        {{item.description | limitTo: 90}}...
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic green button">Approve</div>
+                        <div class="ui basic red button">Decline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+            <!-- <div class="ui basic segment">
+                    <div class="ui list">
+                        <div class="item" ng-repeat="item in comics | limitTo: 3 " ng-click="item">
+                            <img class="ui avatar image" ng-src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}">
+                            <div class="content">
+                                <div class="description">{{item.title}}</div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="ui horizontal divider">
+                    {{heroe.name}}
+                </div>
+                <div class="ui list">
+                    <div class="item" ng-repeat="item in events | limitTo: 3 " ng-click="item">
+                        <img class="ui avatar image" ng-src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}">
+                        <div class="content">
+                            <div class="description">{{item.title}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+</div>
+<iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1Wiy2uGWanAd91EVjI4RhO3Nm3hwSYt3GEZU3KNlVN7w&font=Default&lang=en&initial_zoom=2&height=650' width='100%' height='650' frameborder='0'></iframe>

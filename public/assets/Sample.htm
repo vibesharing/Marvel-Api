@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)http://127.0.0.1:8080/#/ini -->
+<html ng-app="app" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Sample_files/cb=gapi.loaded_0" async=""></script><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="http://127.0.0.1:8080/">
+    <title class="ng-binding">Sample </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./Sample_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./Sample_files/style.css">
+    <link rel="stylesheet" href="./Sample_files/semantic.css">
+
+
+    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+<script src="./Sample_files/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script><style type="text/css"></style>
+    <script src="./Sample_files/jquery-1.11.3.min.js"></script>
+    <script src="./Sample_files/bootstrap.min.js"></script>
+    <script src="./Sample_files/semantic.js"></script>
+
+    <!-- AngularJS -->
+    <script src="./Sample_files/angular.min.js"></script>
+    <script src="./Sample_files/angular-route.min.js"></script>
+
+    <script src="./Sample_files/mainController.js"></script>
+    <script src="./Sample_files/todoService.js"></script>
+
+    <script src="./Sample_files/app.js"></script>
+
+    </head>
+    <body cz-shortcut-listen="true">
+    <header class="navbar navbar-inverse navbar-border" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://127.0.0.1:8080/#/"><img src="./Sample_files/download.png"></a>
+                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+            </div>
+            <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                <ul class="nav navbar-nav pull-right">
+                    <li ng-class="{active: activetab==&#39;/&#39;}"><a href="http://127.0.0.1:8080/#/">Todos</a></li>
+                    <li ng-class="{active: activetab==&#39;/ini&#39;}" class="active"><a href="http://127.0.0.1:8080/#/ini">Ini</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- ngView: undefined --><ng-view class="ng-scope">
+  
+    <script type="text/javascript" class="ng-scope">
+      // Your Client ID can be retrieved from your project in the Google
+      // Developer Console, https://console.developers.google.com
+      var CLIENT_ID = '284291205047-0c211msp5j9n1r6mir49qodppd9ks4nm.apps.googleusercontent.com	';
+
+      var SCOPES = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive'];
+
+      /**
+       * Check if current user has authorized this application.
+       */
+      function checkAuth() {
+        gapi.auth.authorize(
+          {
+            'client_id': CLIENT_ID,
+            'scope': SCOPES.join(' '),
+            'immediate': true
+          }, handleAuthResult);
+      }
+
+      /**
+       * Handle response from authorization server.
+       *
+       * @param {Object} authResult Authorization result.
+       */
+      function handleAuthResult(authResult) {
+        var authorizeDiv = document.getElementById('authorize-div');
+        if (authResult && !authResult.error) {
+          // Hide auth UI, then load client library.
+          authorizeDiv.style.display = 'none';
+          callScriptFunction();
+        } else {
+          // Show auth UI, allowing the user to initiate authorization by
+          // clicking authorize button.
+          authorizeDiv.style.display = 'inline';
+        }
+      }
+
+      /**
+       * Initiate auth flow in response to user clicking authorize button.
+       *
+       * @param {Event} event Button click event.
+       */
+      function handleAuthClick(event) {
+        gapi.auth.authorize(
+          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+          handleAuthResult);
+        return false;
+      }
+
+      /**
+       * Calls an Apps Script function to list the folders in the user's
+       * root Drive folder.
+       */
+      function callScriptFunction() {
+        var scriptId = "1wPgpaW1pyN7kxVaj6kQDEb6llYFZBEK7tHUZUb0x1H1uXkHYpWHz4O4a";
+
+        // Create an execution request object.
+        var request = {
+            'function': 'getFoldersUnderRoot'
+            };
+
+        // Make the API request.
+        var op = gapi.client.request({
+            'root': 'https://script.googleapis.com',
+            'path': 'v1/scripts/' + scriptId + ':run',
+            'method': 'POST',
+            'body': request
+        });
+
+        op.execute(function(resp) {
+          if (resp.error && resp.error.status) {
+            // The API encountered a problem before the script
+            // started executing.
+            appendPre('Error calling API:');
+            appendPre(JSON.stringify(resp, null, 2));
+          } else if (resp.error) {
+            // The API executed, but the script returned an error.
+
+            // Extract the first (and only) set of error details.
+            // The values of this object are the script's 'errorMessage' and
+            // 'errorType', and an array of stack trace elements.
+            var error = resp.error.details[0];
+            appendPre('Script error message: ' + error.errorMessage);
+
+            if (error.scriptStackTraceElements) {
+              // There may not be a stacktrace if the script didn't start
+              // executing.
+              appendPre('Script error stacktrace:');
+              for (var i = 0; i < error.scriptStackTraceElements.length; i++) {
+                var trace = error.scriptStackTraceElements[i];
+                appendPre('\t' + trace.function + ':' + trace.lineNumber);
+              }
+            }
+          } else {
+            // The structure of the result will depend upon what the Apps
+            // Script function returns. Here, the function returns an Apps
+            // Script Object with String keys and values, and so the result
+            // is treated as a JavaScript object (folderSet).
+            var folderSet = resp.response.result;
+            if (Object.keys(folderSet).length == 0) {
+                appendPre('No folders returned!');
+            } else {
+              appendPre('Folders under your root folder:');
+              Object.keys(folderSet).forEach(function(id){
+                appendPre('\t' + folderSet[id] + ' (' + id  + ')');
+              });
+            }
+          }
+        });
+      }
+
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node.
+       *
+       * @param {string} message Text to be placed in pre element.
+       */
+      function appendPre(message) {
+        var pre = document.getElementById('output');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+    </script>
+    <script src="./Sample_files/client.js" class="ng-scope" gapi_processed="true">
+    </script>
+  
+  
+    <div id="authorize-div" style="display: none" class="ng-scope">
+      <span>Authorize access to Google Apps Script Execution API</span>
+      <!--Button for the user to click to initiate auth sequence -->
+      <button id="authorize-button" onclick="handleAuthClick(event)">
+        Authorize
+      </button>
+    </div>
+    <pre id="output" class="ng-scope"></pre>
+  
+
+</ng-view>
+    </div>
+
+
+
+<iframe name="oauth2relay784020953" id="oauth2relay784020953" src="./Sample_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><iframe src="./Sample_files/auth.html" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

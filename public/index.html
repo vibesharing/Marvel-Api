@@ -11,29 +11,31 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./semantic.css">
 
+
+    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
     <script src="js/libs/jquery-1.11.3.min.js"></script>
     <script src="js/libs/bootstrap.min.js"></script>
+    <script src="./semantic.js"></script>
 
     <!-- AngularJS -->
     <script src="js/libs/angular.min.js"></script>
     <script src="js/libs/angular-route.min.js"></script>
 
-    <script src="js/controllers/connectController.js"></script>
     <script src="js/controllers/mainController.js"></script>
-    <script src="js/controllers/adminController.js"></script>
-    <script src="js/services/connectService.js"></script>
-    <script src="js/services/todoService.js"></script>
-    
+    <script src="js/services/mainService.js"></script>
+
     <script src="js/app.js"></script>
 
     </head>
     <body>
-    <header class="navbar navbar-inverse navbar-fixed-top navbar-border" role="navigation">
+    <header class="navbar navbar-inverse navbar-border" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a href="#/"><img src="assets/logo.png"></a>
-                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" 
+                <a href="#/"><img src="assets/download.png"></a>
+                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar"
                          aria-controls="bs-navbar" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -43,10 +45,9 @@
             </div>
             <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav pull-right">
-                    <li ng-class="{active: activetab=='/'}" ng-if="user"><a href="#/">Todos</a></li>
-                    <li ng-class="{active: activetab=='/admin'}" ng-if="user.admin"><a href="#/admin">Administration</a></li>
-                    <li ng-class="{active: activetab=='/about'}"><a href="#/about">About</a></li>
-                    <li ng-if="user"><a href="#/" ng-click="logout()">Logout</a></li>
+                    <li ng-class="{active: activetab=='/'}" ><a href="#/">Todos</a></li>
+                    <li ng-class="{active: activetab=='/ini'}" ><a href="#/ini">Ini</a></li>
+
                 </ul>
             </nav>
         </div>
